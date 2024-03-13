@@ -46,12 +46,20 @@ app.get('/products', (req, res) => {
   res.render('products');
 });
 
+app.get('/cart', (req, res) => {
+    res.render('cart');
+});
+
 app.get('/about', (req, res) => {
   res.render('about');
 });
 
 app.get('/contact', (req, res) => {
   res.render('contact');
+});
+
+app.get('/checkout', (req, res) => {
+    res.render('checkout');
 });
 
 app.get('/account', (req, res) => {
