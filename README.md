@@ -7,7 +7,7 @@ Team Composition:
   Puneet Kumar (github.com/puneet2310)
   Santosh Kumar Patra (github.com/Santosh-kumar-patra)
 
-Key Features on our website:
+Key Features on our website: 
   -> Visually appealing theme which is consistent for the website in and out 
   -> Provides User Login and Signup with integrated database to keep the data secure with encrypted passwords 
   -> Well-integrated theme of the legendary Harry Potter universe
