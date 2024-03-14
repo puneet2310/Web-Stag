@@ -1,4 +1,5 @@
-# Website Name: DiagonDirect
+# <p align="center">DiagonDirect</p>
+
 ## Team Name: Web-Stag
 
 ### Team Composition:
