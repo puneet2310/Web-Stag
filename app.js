@@ -8,6 +8,7 @@ const path = require('path')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const bcryptjs = require('bcryptjs')
+const port = 4000;
 
 app.use(express.json())
 app.use(cookieParser())
@@ -142,6 +143,6 @@ app.post("/login",async (req,res) => {
     }
 })
 
-app.listen(4000,() => {
-    console.log("CONNECTED")
+app.listen(port, () => {
+    console.log(`Server connected to port https://localhost:${port}`)
 })
