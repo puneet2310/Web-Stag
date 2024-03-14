@@ -1,5 +1,35 @@
+<!-- {{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <link rel="stylesheet" href="css/signup.css">
+
+</head>
+<body>
+    <h1>Signup</h1>
+
+    <form action="/signup" method="POST">
+    
+    <input type="text" name="name" placeholder="Name" autocomplete="off">
+    <br>
+    <input type="password" name="password" placeholder="Password" autocomplete="off">
+    <br>
+    <input type="submit" class="sub">
+
+
+
+
+    </form>
+    <a href="/">Go to login page</a>
+    
+</body>
+</html> --}} -->
+
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,10 +44,10 @@
         <div class="container">
             <div class="navbar">
                 <div class="logo">
-                    <img src="logo.png" alt="" width="125px" height="40px">
+                    <a href="/"><img src="logo-color.png" alt="" width="180px" height="60px"></a>
                 </div>
                 <nav>
-                    <ul id="MenuItems">
+                    <ul id="MenuItems" class="opener">
                         <li><a href="/">Home</a></li>
                         <li><a href="/products">Products</a></li>
                         <li><a href="/about">About</a></li>
@@ -25,49 +55,42 @@
                         <!-- <li><a href="/account">Account</a></li> -->
                     </ul>
                 </nav>
-                <a href="/cart"><div class="cart"><img src="cart.png" width="30px" height="30px"></div></a>
+                <a href="/cart"><div class="cart"><img src="cart.png" width="50px" height="50px"></div></a>
+                <div id="cartAmount" class="cartAmount">0</div>
                 <img src="menu.png" class="menu-icon" onclick="menutoggle()">
             </div>
             
         </div>
-     
-    
-      	<!-- Contact Section -->
-		<div class="contact-section">
-		    <div class="container">
-		        <div class="row">
-		            <div class="col-12">
-		                <h2>Contact Us</h2>
-		                <p>Have questions or feedback? Reach out to us!</p>
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="col-12">
-		                <!-- Social Links -->
-		                <div class="social-links">
-		                    <a href="#" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-		                    <!-- Add more social icons as needed -->
-		                </div>
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="col-12">
-		                <!-- Important Links -->
-		                <div class="important-links">
-		                    <ul>
-		                        <li><a href="#">Terms and Conditions</a></li>
-		                        <li><a href="#">Privacy Policy</a></li>
-		                        <li><a href="#">Shipping Information</a></li>
-		                        <!-- Add more important links as needed -->
-		                    </ul>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-      
 
-     
+
+        <!--account page-->
+        <div class="account-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="2.jpeg" alt="" width="100%">
+                    </div>
+                    <div class="col-2">
+                        <div class="form-container">
+                            <h1>Register</h1>
+                            <div class="fill-in-details">
+                                <form action="/signup" method="POST">
+                                    <input type="text" placeholder="Username" name="name" id="username ">
+                                    <input type="email" placeholder="Email" name="email">
+                                    <input type="password" placeholder="Password" name="password" id="password">
+                                    <button type="submit" class="button">Register</button>
+                                    <h4>Already have an account ?<br> <a href="/login">Sign in</a></h4>
+                                </form>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+   
       <!--Website Footer-->
       <div class="footer">
         <div class="container">
@@ -106,7 +129,7 @@
         </div>
       </div>
 
-
+   
       <!--Js for toggle menu-->
       <script>
         var MenuItems=document.getElementById("MenuItems");
@@ -123,5 +146,24 @@
             }
         }
       </script>
+
+      <!--js for login form-->
+      <script>
+        var LoginForm=document.getElementById("LoginForm");
+        var RegForm=document.getElementById("RegForm");
+        var indicator=document.getElementById("indicator");
+        function register(){
+            RegForm.style.transform="translateX(0px)";
+            LoginForm.style.transform="translateX(0px)";
+            indicator.style.transform="translateX(100px)";
+        }
+        function login(){
+            RegForm.style.transform="translateX(300px)";
+            LoginForm.style.transform="translateX(300px)";
+            indicator.style.transform="translateX(0px)";
+        }
+
+      </script>
+      
 </body>
 </html>

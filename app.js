@@ -1,224 +1,147 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcryptjs');
-const path = require('path');
-
-const app = express();
-const port = 3000;
-
-app.set('view engine', 'ejs');
-
-mongoose.connect('mongodb+srv://WebStag:Avishkaar@cluster0.5rbxk8m.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/newDB');
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
-
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  email: String,
-});
-
-userSchema.pre('save', async function (next) {
-  if (this.isNew || this.isModified('password')) {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, salt);
-    this.password = hashedPassword;
-  }
-  next();
-});
-
-const User = mongoose.model('User', userSchema);
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'views')));
-
-app.get('/', (req, res) => {
-  res.render('index');
-});
-
-app.get('/products', (req, res) => {
-  res.render('products');
-});
-
-app.get('/cart', (req, res) => {
-    res.render('cart');
-});
-
-app.get('/about', (req, res) => {
-  res.render('about');
-});
-
-app.get('/contact', (req, res) => {
-  res.render('contact');
-});
-
-app.get('/checkout', (req, res) => {
-    res.render('checkout');
-});
-
-app.get('/account', (req, res) => {
-  res.render('account', { loginError: '' }); // Initialize loginError to an empty string
-});
+const express = require('express')
+const Collection = require('./views/mongo')
 
 
+const app = express()
 
-app.post('/register', async (req, res) => {
-  try {
-    // Validate user data (e.g., email format, password strength)
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+const path = require('path')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
+const bcryptjs = require('bcryptjs')
 
-    const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword
-    });
+app.use(express.json())
+app.use(cookieParser())
+// app.use(bcryptjs)
+app.use(express.urlencoded({extended : false}))
 
-    await newUser.save();
-      res.redirect('/');
-    //   alert("Sucessfully Registered");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error registering user'); // Informative error message
-  }
-});
+// const templatePath =  path.join(__dirname,"./views")
+// const publicPath = path.join(__dirname,"./public")
 
 
+// app.set("view engine","hbs")
+app.set("view engine","ejs")
+// app.set("views",templatePath)
+// app.use(express.static(publicPath))
+app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'views')))
 
-app.post('/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-  
-    // Validate login credentials (replace with your actual logic)
-    if (username === 'valid_username' && password === 'valid_password') {
-      // Login successful
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end('Login successful!');
-        res.render('new_index');
-    } else {
-      // Invalid credentials
-      res.redirect('/account');
-        alert("Invalid Credentials"); // Send JSON response with error message
+async function hashPass(password){
+    const res = await bcryptjs.hash(password,10)
+    return res
+}
+
+async function compare(userPass , hashPass){
+    const res = await bcryptjs.compare(userPass,hashPass)
+    return res
+}
+
+
+app.get("/",(req,res) => {
+
+    if(req.cookies.jwt){
+        const verify = jwt.verify(req.cookies.jwt,"jdbfhdsbvbdskjhvdfbvmhdsiuhmdsnvldsjkvdbjvhkdsbvdsnlvihdsvbjkkdbsmvbmdsbkjhdskbvmbdsmbhuhfyvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkvjhdskbvmbdsjkvhuidsk")
+        res.render("home",{name:verify.name})
     }
-  });
+    else{
+        res.render("index")
+    }
+})
 
+app.get("/signup",(req,res) => {
+    res.render("signup")
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+app.get("/login", (req, res) => {
+    res.render("login");
 });
 
+app.get("/products",(req,res) => {
+    res.render("products")
+})
 
+app.get("/cart", (req, res) => {
+    res.render("cart");
+});
 
+app.get("/contact", (req, res) => {
+    res.render("contact");
+});
 
+app.get("/about", (req, res) => {
+    res.render("about");
+});
+app.get("/checkout", (req, res) => {
+    res.render("checkout");
+});
 
+app.post("/signup",async (req,res) => {
+    try {
 
+        if (!req.body.name) {
+            return res.send("<script>alert('UserName is required'); window.location.href = '/signup';</script>");
+        }
+        if (!req.body.email) {
+            return res.send("<script>alert('Email is required'); window.location.href = '/signup';</script>");
+        }
+        if (!req.body.password) {
+            return res.send("<script>alert('Password is required'); window.location.href = '/signup';</script>");
+        }
 
+        const check = await Collection.findOne({name:req.body.name})
+        
+        if(check){
+            res.send("USER ALREADY EXISTS")
+        }
+        else{
+            const token = jwt.sign({name:req.body.name},"jdbfhdsbvbdskjhvdfbvmhdsiuhmdsnvldsjkvdbjvhkdsbvdsnlvihdsvbjkkdbsmvbmdsbkjhdskbvmbdsmbhuhfyvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkvjhdskbvmbdsjkvhuidsk")
+            
+            // res.cookie("jwt",token,{
+            //     maxAge:600000,
+            //     httpOnly:true
+            // })
 
+            const data = {
+                name: req.body.name,
+                password: await hashPass(req.body.password),
+                token: token,
+            }
 
+            await Collection.insertMany([data])
+            res.render("index")
 
+            
+        }
+    } catch (error) {
+        res.send("WRONG DEATILS")
+        
+    }
+})
 
+app.post("/login",async (req,res) => {
+    try {
+        const check = await Collection.findOne({name:req.body.name})
+        const passCheck = await compare(req.body.password , check.password)
+        console.log(check)
 
-0// const express = require('express');
-// const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
-// const bcrypt = require('bcryptjs');
-// const path = require('path');
+        if(check && passCheck){
 
-// const app = express();
-// const port = 3000;
+            // res.cookie("jwt",check.token,{
+            //     maxAge:600000,
+            //     httpOnly:true
+            // })
 
-// app.set('view engine', 'ejs');
+            res.render("index",{name:req.body.name})
+        }
+        else{
+            res.send("<script>alert('Invalid Credentials'); window.location.href = '/login';</script>");
+        }
+    }
+    catch{
+        // res.send("wrong")
+        res.send("<script>alert('Invalid Credentials'); window.location.href = '/login';</script>");
+    }
+})
 
-// mongoose.connect('mongodb://localhost:27017/newDB');
-// const db = mongoose.connection;
-
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-// db.once('open', () => {
-//   console.log('Connected to MongoDB');
-// });
-
-// const userSchema = new mongoose.Schema({
-//   username: String, // Changed to lowercase 'username'
-//   password: String,
-//   email: String,
-// });
-
-// // Hash password before saving the user
-// userSchema.pre('save', async function (next) {
-//   if (this.isNew || this.isModified('password')) { // Check if password is modified
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(this.password, salt);
-//     this.password = hashedPassword;
-//   }
-//   next();
-// });
-
-// const User = mongoose.model('User', userSchema);
-
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.static(path.join(__dirname, 'views')));
-
-// app.get('/', (req, res) => {
-//   // res.sendFile(__dirname + '/views/index.html');
-// 	res.render('index');
-// });
-
-// app.get('/account', (req, res) => { // Corrected route
-//   res.render('account');
-// });
-
-// app.get('/about', (req, res) => {
-//   res.render('about'); // Render the about.html template
-// });
-
-// app.get('/products', (req, res) => { // Corrected route
-//   res.render('products');
-// });
-
-
-// app.post('/register', async (req, res) => { // Use async function for async operations
-//   try {
-//     const newUser = new User({
-//       username: req.body.username, // Changed to lowercase 'username'
-//       email: req.body.email,
-//       password: req.body.password,
-//     });
-
-//     await newUser.save(); // Await the save operation
-
-//     res.redirect("/"); // Redirect to account page on success
-//   } catch (err) {
-//     console.log(err);
-//     // Implement error handling and display message to user
-//   }
-// });
-
-// app.listen(port, () => {
-//   console.log(`Server is running at http://localhost:${port}`);
-// });
-
-
-
-
+app.listen(4000,() => {
+    console.log("CONNECTED")
+})
