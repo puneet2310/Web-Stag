@@ -17,5 +17,5 @@
 - A simple yet cool checkout page with a great payment page under construction
 
 ### Technologies Used:
-The project has been made using the classic combo of HTML, CSS, and JavaScript.
-MongoDB has been used to store user data and encrypted passwords.
+- The project has been made using the classic combo of HTML, CSS, and JavaScript.
+- MongoDB has been used to store user data and encrypted passwords.
