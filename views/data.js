@@ -1,5 +1,12 @@
 let shopItemsData = [
   {
+    id: "jfhgbvnscs",
+    name: "Nimbus 2001",
+    price: 2899,
+    desc: "Bro so fast, it reached to the first even in the list of products",
+    img: "nimbus-2001.png",
+  },
+  {
   id: "ioytrhndcv",
     name: "Ravenclaw Robe",
     price: 1099,
@@ -26,13 +33,6 @@ let shopItemsData = [
     price: 1799,
     desc: "You'll know what you're buying to see people walk",
     img: "map.png",
-  },
-  {
-    id: "jfhgbvnscs",
-    name: "Nimbus 2001",
-    price: 2899,
-    desc: "Bro so fast, it reached to the first even in the list of products",
-    img: "nimbus-2001.png",
   },
   {
     id: "rtytytuyuytyytbSFAS",
@@ -195,4 +195,4 @@ let shopItemsData = [
     desc: "What could be better to start school with a full quidditch set!!",
     img: "quidditch-set.jpeg",
   },
-];
+ ];

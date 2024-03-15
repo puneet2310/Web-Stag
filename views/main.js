@@ -34,7 +34,7 @@ let generateShop = () => {
           <h3>${name}</h3>
           <p>${desc}</p>
           <div class="price-quantity">
-            <h2>$ ${price}</h2>
+            <h2>₹ ${price}</h2>
             <div class="buttons">
               <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
               <div id="${id}" class="quantity">${search.item}</div>
