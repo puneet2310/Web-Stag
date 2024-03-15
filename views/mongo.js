@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect("mongodb://localhost:27017/AuthTut")
+mongoose.connect("mongodb://localhost:27017/per")
 .then(() => {
     console.log("MONGO CONNECTED")
 })
@@ -10,7 +10,7 @@ mongoose.connect("mongodb://localhost:27017/AuthTut")
 const userSchema = new mongoose.Schema({
     name:{
         type: String,
-        required:true
+        //required:true
     },
     email:{
         type:String,
@@ -18,7 +18,15 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type: String,
-        required:true
+        //required:true
+    },
+    mobile:{
+        type:String,
+        enum:[0-9]
+    },
+    address:{
+        type: String,
+        //required: true
     },
     token:{
         type: String,

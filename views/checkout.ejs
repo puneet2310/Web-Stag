@@ -34,26 +34,55 @@
     
 
   <div id="label" class="text-center"></div>
-    <div class="container">
-        <h1>Payment</h1>
-        <div id="billAmount"></div>
-        <div id="paymentOptions">
-          <select id="paymentMethod" onchange="changePaymentMethod()">
-            <option value="payOnDelivery">Pay on Delivery</option>
-            <option value="payByQRCode">Pay through QR Code</option>
-          </select>
-          <button id="payButton" onclick="handlePayment()">Place Order</button>
-          <a href="/cart">
-            <button id="goBackButton">Back to Cart</button>
-          </a>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="billingSection">
+                <h2>Billing</h2>
+                <!-- Adding user details input fields inside a form -->
+                <form action="/checkout" method="post">
+                    <div>
+                        <label for="fullName"></label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                    </div>
+                    <div>
+                        <label for="address"></label>
+                        <textarea id="address" name="address"  placeholder="Address" required></textarea>
+                    </div>
+                    <div>
+                        <label for="pincode"></label>
+                        <input type="text" id="pincode" name="pincode" placeholder="Pincode" pattern="[0-9]{6}" title="Please fill valid pincode (Only numbers and max 6)." required>
+                    </div>
+                    <div id="billAmount"></div>
+                    <div id="paymentOptions">
+                        <select id="paymentMethod" onchange="changePaymentMethod()">
+                            <option value="payOnDelivery">Pay on Delivery</option>
+                            <option value="payByQRCode">Pay through QR Code</option>
+                        </select>
+                        <button type="submit" id="payButton">Place Order</button>
+                        <a href="/cart">
+                            <button id="goBackButton">Back to Cart</button>
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div id="shopping-cart">
-          <!-- Your shopping cart items will be displayed here -->
+        <div class="col-md-8">
+            <div id="shopping-cart">
+                <!-- Your shopping cart items will be displayed here -->
+            </div>
         </div>
-        <div id="label">
-          <!-- Label for total bill amount will be displayed here -->
+    </div>
+</div>
+
+        <div class="col-md-8">
+            <div id="shopping-cart">
+                <!-- Your shopping cart items will be displayed here -->
+            </div>
         </div>
-      </div>
+    </div>
+</div>
+
 
 
 

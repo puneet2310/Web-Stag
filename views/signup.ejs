@@ -45,9 +45,10 @@
                             <h1>Register</h1>
                             <div class="fill-in-details">
                                 <form action="/signup" method="POST">
-                                    <input type="text" placeholder="Username" name="name" id="username ">
-                                    <input type="email" placeholder="Email" name="email">
-                                    <input type="password" placeholder="Password" name="password" id="password">
+                                    <input type="text" placeholder="Username" name="name" id="username " required>
+                                    <input type="email" placeholder="Email" name="email" required>
+                                    <input type="tel" placeholder="Mobile No." name="mobile" pattern="[0-9]{10}" title="Please enter a 10-digit mobile number" required>
+                                    <input type="password" placeholder="Password" name="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%#*?&]{8,}$" title="Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character." required>
                                     <button type="submit" class="button">Register</button>
                                     <h5>Already have an account ? <a href="/login">Sign in</a></h5>
                                 </form>
