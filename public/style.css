@@ -908,6 +908,43 @@ button[type="submit"] {
     background-color: #d32f2f; /* Darker red background on hover */
   }
   
+  #billingSection {
+    background-color: #021427;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+#billingSection h2 {
+    margin-bottom: 15px;
+    color: antiquewhite;
+}
+
+#billingSection label {
+    display: block;
+    margin-bottom: 5px;
+    color: antiquewhite;
+}
+
+#billingSection input[type="text"],
+#billingSection textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#billingSection select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    appearance: none; /* Remove default appearance for select */
+}
+
 
   .container {
     color: antiquewhite;
