@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            padding: 0 20px; /* Adjust the padding values as needed */
+        }
+        .about-container {
+            margin-bottom: 40px; /* Add margin bottom to create space */
+        }
+    </style>
+</head>
+<body>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="/"><img src="/photos/logo-color1.png" alt="" width="180px" height="60px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/products">Products</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/signup">Signup</a></li>
+                        <li><a href="/login">Sign-in</a></li>
+                        <!-- <li><a href="/account">Account</a></li> -->
+                    </ul>
+                </nav>
+                <a href="/cart"><div class="cart"><img src="/photos/cart.png" width="50px" height="50px"></div></a>
+                <img src="/photos/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+            
+        </div>
+     
+        <div class="about-container">
+            <div class="about-section">
+                <h2 style = font-size:40px>About Us</h2>
+                <p>We are a team of four students, all from First Year of CSE department from NIT Allahabad and we have designed this E-commerce website themed on Harry Potter's Diagon Alley.</p>
+                <p>We aspire to make this website the best we can and make it one of the best websites in the market in the long run</p>
+                <p>We would love to have your feedback on our website so be kind and review us on the stores</p>
+            </div>
+        
+            <div class="about-section" style="margin-top: 20px;">
+                <h2 style = font-size:40px>Our Team</h2>
+                <p>Our team has a total of Four Members:</p>
+                <p>1. Debopriyo Sen - Frontend Developer</p>
+                <p>2. Santosh Kumar Patra - Frontend Developer</p>
+                <p>3. Puneet Kumar - Backend Developer</p>
+                <p>4. Satyam Jha - Backend Developer</p>
+            </div>
+        </div>
+      
+
+     
+      <!--Website Footer-->
+      <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download our App</h3>
+                    <p>Download App for Android and Ios mobile phone</p>
+                    <div class="app-logo">
+                        <img src="/photos/play-store.png" alt="">
+                        <img src="/photos/app-store.png" alt="">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="/photos/logo-color.png" alt="">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum assumenda rerum veniam itaque debitis mollitia ratione.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li><a href="https://www.facebook.com/MNNITALLD/">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/p/C4Dhx1NRQ3D/?igsh=MTQxNnQyeGV1a3VuZA==">Instagram</a></li>
+                        <li><a href="https://twitter.com/MNNITALLD">Twitter</a></li>
+                        <li><a href="https://youtu.be/xvFZjo5PgG0?feature=shared">Youtube</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <!--Js for toggle menu-->
+      <script>
+        var MenuItems=document.getElementById("MenuItems");
+
+        MenuItems.style.maxHeight ="0px";
+
+        function menutoggle(){
+            if( MenuItems.style.maxHeight =="0px")
+            {
+                MenuItems.style.maxHeight ="200px";
+            }
+            else{
+                MenuItems.style.maxHeight ="0px";
+            }
+        }
+      </script>
+</body>
+</html>
