@@ -23,6 +23,15 @@ app.set("view engine","ejs")
 // app.use(express.static(publicPath))
 app.use(express.static(path.join(__dirname,'public')))
 app.use(express.static(path.join(__dirname,'views')))
+app.use(express.static(path.join(__dirname,'stylesheets')))
+app.use(express.static(path.join(__dirname,'/views/photos')))
+
+app.use(express.static(path.join(__dirname,'Cart')))
+app.use(express.static(path.join(__dirname,'views')))
+app.use(express.static(path.join(__dirname,'stylesheets')))
+app.use(express.static(path.join(__dirname,'photos')))
+// app.use('/photos', express.static(path.join(__dirname, 'photos')));
+
 
 async function hashPass(password){
     const res = await bcryptjs.hash(password,10)
@@ -39,38 +48,38 @@ app.get("/",(req,res) => {
 
     if(req.cookies.jwt){
         const verify = jwt.verify(req.cookies.jwt,"jdbfhdsbvbdskjhvdfbvmhdsiuhmdsnvldsjkvdbjvhkdsbvdsnlvihdsvbjkkdbsmvbmdsbkjhdskbvmbdsmbhuhfyvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkvjhdskbvmbdsjkvhuidsk")
-        res.render("index",{name:verify.name})
+        res.render("./Landing_Page/index",{name:verify.name})
     }
     else{
-        res.render("index")
+        res.render("./Landing_Page/index")
     }
 })
 
 app.get("/signup",(req,res) => {
-    res.render("signup")
+    res.render("./Signup_Page/signup")
 })
 
 app.get("/login", (req, res) => {
-    res.render("login");
+    res.render("./Login_Page/login");
 });
 
 app.get("/products",(req,res) => {
-    res.render("products")
+    res.render("./Products/products")
 })
 
 app.get("/cart", (req, res) => {
-    res.render("cart");
+    res.render("./Cart/cart");
 });
 
 app.get("/contact", (req, res) => {
-    res.render("contact");
+    res.render("./Contacts/contact");
 });
 
 app.get("/about", (req, res) => {
-    res.render("about");
+    res.render("./About/about");
 });
 app.get("/checkout", (req, res) => {
-    res.render("checkout");
+    res.render("./Checkout_Page/checkout");
 });
 
 app.post("/signup",async (req,res) => {
@@ -96,7 +105,7 @@ app.post("/signup",async (req,res) => {
             }
 
             await Collection.insertMany([data])
-            res.render("index_1")
+            res.render("./Landing_Page/index_1")
 
             
         }
@@ -120,14 +129,14 @@ app.post("/login",async (req,res) => {
                 httpOnly:true
             })
 
-            res.render("new_index",{name:req.body.name})
+            res.render("./Landing_Page/new_index",{name:req.body.name})
         }
         else{
-            res.send("<script>alert('Invalid Credentials'); window.location.href = '/login';</script>");
+            res.send("<script>alert('Invalid Credentials'); window.location.href = './Login_Page/login';</script>");
         }
     }
     catch{
-        res.send("<script>alert('Invalid Credentials'); window.location.href = '/login';</script>");
+        res.send("<script>alert('Invalid Credentials'); window.location.href = './Login_Page/login';</script>");
     }
 })
 
