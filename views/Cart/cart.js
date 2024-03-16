@@ -28,12 +28,12 @@ calculation();
 
 let generateCartItems = () => {
   if (basket.length !== 0) {
-    ShoppingCart.innerHTML = basket
+    return(ShoppingCart.innerHTML = basket
       .map((x) => {
         let { id, item } = x;
         let search = shopItemsData.find((x) => x.id === id) || [];
         let { img, price, name } = search;
-        return `
+        return  `
           <div class="cart-item">
             <img width="100" height="150" src=${img} alt="" />
             <div class="details">
@@ -56,14 +56,8 @@ let generateCartItems = () => {
           </div>
         `;
       })
-      .join("");
+      .join(""));
 
-    TotalAmount(); // Update total amount when the cart is not empty
-    label.innerHTML = `
-      <a href="/">
-        <button class="HomeBtn">Back to Home</button>
-      </a>
-    `;
   } else {
     ShoppingCart.innerHTML = "";
     label.innerHTML = `
