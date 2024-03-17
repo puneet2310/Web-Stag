@@ -50,7 +50,7 @@ let generateCartItems = () => {
     ShoppingCart.innerHTML = "";
     label.innerHTML = `
     <h2>Cart is Empty</h2>
-    <a href="/">
+    <a href="/new_index">
       <button class="HomeBtn">Back to Home</button>
     </a>
     `;
@@ -159,7 +159,7 @@ function handlePayment() {
 function placeOrder() {
   alert("Your order has been placed. Thank you!");
   clearCart(); // Clear the cart
-  window.location.href = "/";
+  window.location.href = "/new_index";
 }
 
 function payByQRCode() {
@@ -167,5 +167,5 @@ function payByQRCode() {
   // window.location.href = "qr_code_payment.html";
 
   alert("This feature will be available very soon");
-  window.location.href = "/checkout";
+  window.location.href = "/checkout_new";
 }
