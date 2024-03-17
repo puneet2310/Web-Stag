@@ -1,37 +1,24 @@
 let ShoppingCart = document.getElementById("shopping-cart");
-let label = document.getElementById("label");
-
-/**
- * ! Basket to hold all the selected items
- * ? the getItem part is retrieving data from the local storage
- * ? if local storage is blank, basket becomes an empty array
- */
-
+let label = document.getElementById("label");  
+//creating an array basket of the orders we have got from products page
+//getting the orders stored through the local storages
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
-/**
- * ! To calculate total amount of selected Items
- */
-
 let calculation = () => {
-  let cartIcon = document.getElementById("cartAmount");
+  let cartIcon = document.getElementById("cartAmount"); 
+  // getting total number of elements in the basket
   cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
 };
 
-calculation();
+calculation();  // calling the function to update the number of elements on the cart
 
-/**
- * ! Generates the Cart Page with product cards composed of
- * ! images, title, price, buttons, & Total price
- * ? When basket is blank -> show's Cart is Empty
- */
 
 let generateCartItems = () => {
   if (basket.length !== 0) {
-    return (ShoppingCart.innerHTML = basket
+    return (ShoppingCart.innerHTML = basket    //if basket not empty then just generate cast items html adn give it to shoppingcart
       .map((x) => {
         let { id, item } = x;
-        let search = shopItemsData.find((x) => x.id === id) || [];
+        let search = shopItemsData.find((x) => x.id === id) || [];    //find corresponding data based on the product id unique to all
         let { img, price, name } = search;
         return `
       <div class="cart-item">
@@ -61,7 +48,8 @@ let generateCartItems = () => {
       </div>
       `;
       })
-      .join(""));
+      .join(""));    //join all elements in a single string
+    //cha-hae-inn aint angt-t the 
   } else {
     ShoppingCart.innerHTML = "";
     label.innerHTML = `
@@ -75,13 +63,9 @@ let generateCartItems = () => {
 
 generateCartItems();
 
-/**
- * ! used to increase the selected product item quantity by 1
- */
-
 let increment = (id) => {
   let selectedItem = id;
-  let search = basket.find((x) => x.id === selectedItem.id);
+  let search = basket.find((x) => x.id === selectedItem.id);    finding out the 
 
   if (search === undefined) {
     basket.push({
