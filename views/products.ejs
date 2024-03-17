@@ -14,7 +14,6 @@
 
 </head>
 <body>
-    
         <div class="container">
             <div class="navbar">
                 <div class="logo">
@@ -118,5 +117,23 @@
       <script src="data.js"></script>
       <script src="main.js"></script>
       <script src="filter.js"></script>
+      
+      <script>
+      document.getElementById('cartButton').addEventListener('click', function() {
+          // Check if the token exists in local storage
+        const authToken = localStorage.getItem('token');
+    
+        if (authToken) {
+            // User is logged in, proceed with cart action
+            console.log('User is logged in, proceed with cart action...');
+            // Add your cart action logic here
+        } else {
+            // User is not logged in, redirect to login page or show a message
+            console.log('User is not logged in, redirecting to login page...');
+            // You can redirect to login page or show a message to the user
+            window.location.href = '/login'; // Redirect to login page
+        }
+    });
+</script>
 </body>
 </html>

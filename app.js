@@ -6,7 +6,7 @@ const path = require('path')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
 const bcryptjs = require('bcryptjs')
-const port = 3000;
+const port = 2000;
 
 app.use(express.json())
 app.use(cookieParser())
@@ -58,9 +58,15 @@ app.get("/products",(req,res) => {
     res.render("products")
 })
 
+
+
+
 app.get("/cart", (req, res) => {
     res.render("cart");
 });
+
+
+
 
 app.get("/contact", (req, res) => {
     res.render("contact");
@@ -78,7 +84,7 @@ app.post("/signup",async (req,res) => {
         const check = await Collection.findOne({name:req.body.name})
         
         if(check){
-            res.send("USER ALREADY EXISTS")
+            res.send("<script>alert('Invalid Credentials'); window.location.href = '/signup';</script>")
         }
         else{
             const token = jwt.sign({name:req.body.name},"jdbfhdsbvbdskjhvdfbvmhdsiuhmdsnvldsjkvdbjvhkdsbvdsnlvihdsvbjkkdbsmvbmdsbkjhdskbvmbdsmbhuhfyvhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkvjhdskbvmbdsjkvhuidsk")
