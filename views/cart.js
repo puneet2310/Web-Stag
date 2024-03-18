@@ -34,8 +34,8 @@ let generateCartItems = () => {
             <i onclick="removeItem(${id})" class="bi bi-x-lg"></i>
           </div>
 
-          //this snippet is for the buttons in the cart 
-          <div class="cart-buttons">    
+          
+          <div class="cart-buttons">       
             <div class="buttons">
               <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
               <div id=${id} class="quantity">${item}</div>
@@ -64,37 +64,35 @@ let generateCartItems = () => {
 };
 
 generateCartItems();
-
+//now the function is for to add those selected items into our cart by finding them using their IDs
 let increment = (id) => {
   let selectedItem = id;
   let search = basket.find((x) => x.id === selectedItem.id);    finding out the 
 
   if (search === undefined) {
-    basket.push({
+    basket.push({    //if we cant find the item in the cart then just add it as the first item with amount = 1
       id: selectedItem.id,
       item: 1,
     });
-  } else {
+  } else {    //in case the id is found inside the cart already then just increase its amount by unity
     search.item += 1;
   }
 
-  generateCartItems();
+  generateCartItems();  
   update(selectedItem.id);
-  localStorage.setItem("data", JSON.stringify(basket));
+  localStorage.setItem("data", JSON.stringify(basket));    //we store all this data into our local storage
 };
 
-/**
- * ! used to decrease the selected product item quantity by 1
- */
 
+// now for the decrement button we call the function below 
 let decrement = (id) => {
   let selectedItem = id;
-  let search = basket.find((x) => x.id === selectedItem.id);
+  let search = basket.find((x) => x.id === selectedItem.id);    //searching the item inside the cart first
 
-  if (search === undefined) return;
-  else if (search.item === 0) return;
-  else {
-    search.item -= 1;
+  if (search === undefined) return;    //if the search is undefined and i dont find that product then return back
+  else if (search.item === 0) return;    //if the product was there but its value has been taken down to 0 then we return as well
+  else {  
+    search.item -= 1;      //else, decrease the amount by unity
   }
 
   update(selectedItem.id);
@@ -103,10 +101,7 @@ let decrement = (id) => {
   localStorage.setItem("data", JSON.stringify(basket));
 };
 
-/**
- * ! To update the digits of picked items on each item card
- */
-
+//To update the digits of picked items on each item card
 let update = (id) => {
   let search = basket.find((x) => x.id === id);
   document.getElementById(id).innerHTML = search.item;
@@ -114,39 +109,34 @@ let update = (id) => {
   TotalAmount();
 };
 
-/**
- * ! Used to remove 1 selected product card from basket
- * ! using the X [cross] button
- */
 
-let removeItem = (id) => {
+let removeItem = (id) => {      //for the cross button inside the cart 
   let selectedItem = id;
-  basket = basket.filter((x) => x.id !== selectedItem.id);
+  basket = basket.filter((x) => x.id !== selectedItem.id);  
+
+  // we do all the process once again of calculating then generating the new cart items and then finding the total amt
   calculation();
   generateCartItems();
   TotalAmount();
   localStorage.setItem("data", JSON.stringify(basket));
 };
 
-/**
- * ! Used to calculate total amount of the selected Products
- * ! with specific quantity
- * ? When basket is blank, it will show nothing
- */
 
+//to calculate the total amount of any product 
 let TotalAmount = () => {
   if (basket.length !== 0) {
     let amount = basket
       .map((x) => {
         let { id, item } = x;
         let filterData = shopItemsData.find((x) => x.id === id);
-        return filterData.price * item;
+        return filterData.price * item;    //filling in the price 
       })
       .reduce((x, y) => x + y, 0);
 
+    //adding buttons to the cart page for it to go to the checkout page or the clear cart page
     return (label.innerHTML = `
     <h2>Total Bill : $ ${amount}</h2>
-    <a href="/checkout_new" ><button class="checkout">Checkout</button></a>
+    <a href="/checkout_new" ><button class="checkout">Checkout</button></a>    
     <button onclick="clearCart()" class="removeAll">Clear Cart</button>
     `);
   } else return;
@@ -154,10 +144,7 @@ let TotalAmount = () => {
 
 TotalAmount();
 
-/**
- * ! Used to clear cart, and remove everything from local storage
- */
-
+// clearing the cart and removing all from the local storage as setting the basket back to an empty list
 let clearCart = () => {
   basket = [];
   generateCartItems();
