@@ -1,17 +1,7 @@
 let shop = document.getElementById("shop");
-
-/**
- * ! Basket to hold all the selected items
- * ? the getItem part is retrieving data from the local storage
- * ? if local storage is blank, basket becomes an empty array
- */
-
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
-/**
- * ! Generates the shop with product cards composed of
- * ! images, title, price, buttons, description
- */
+// Generates the shop with product cards composed of images, title, price, buttons, description
 
 let generateShop = () => {
   let searchInput = document.getElementById("searchInput").value.toLowerCase();
@@ -49,9 +39,7 @@ let generateShop = () => {
 
 generateShop();
 
-/**
- * ! used to increase the selected product item quantity by 1
- */
+//increment function same as before 
 
 let increment = (id) => {
   let selectedItem = id;
@@ -71,10 +59,7 @@ let increment = (id) => {
   localStorage.setItem("data", JSON.stringify(basket));
 };
 
-/**
- * ! used to decrease the selected product item quantity by 1
- */
-
+//decrement function same as before
 let decrement = (id) => {
   let selectedItem = id;
   let search = basket.find((x) => x.id === selectedItem.id);
@@ -91,9 +76,7 @@ let decrement = (id) => {
   localStorage.setItem("data", JSON.stringify(basket));
 };
 
-/**
- * ! To update the digits of picked items on each item card
- */
+//updating values on cards of each item
 
 let update = (id) => {
   let search = basket.find((x) => x.id === id);
@@ -101,9 +84,7 @@ let update = (id) => {
   calculation();
 };
 
-/**
- * ! To calculate total amount of selected Items
- */
+//finding total amount of each item
 
 let calculation = () => {
   let cartIcon = document.getElementById("cartAmount");
@@ -117,9 +98,9 @@ let applyFilters = () => {
   generateShop();
 };
 
-// Event listener for search input
+// Event listener for search input button
 document.getElementById("searchInput").addEventListener("input", applyFilters);
 
-// Event listener for min and max price inputs
+// Event listener for min and max price input fields
 document.getElementById("minPriceInput").addEventListener("input", applyFilters);
 document.getElementById("maxPriceInput").addEventListener("input", applyFilters);
