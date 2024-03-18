@@ -14,19 +14,20 @@
   
     <div class="navbar">
         <div class="logo">
-            <a href="/"><img src="logo-color1.png" alt="" width="180px" height="60px"></a>
+            <a href="/new_index"><img src="logo-color1.png" alt="" width="180px" height="60px"></a>
         </div>
         <nav>
             <ul id="MenuItems" class="opener">
-                <li><a href="/">Home</a></li>
-                <li><a href="/products">Products</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <!-- <li><a href="/signup">Signup</a></li> -->
+                <li><a href="/new_index">Home</a></li>
+                <li><a href="/products_new">Products</a></li>
+                <li><a href="/about_new">About</a></li>
+                <li><a href="/contact_new">Contact</a></li>
+                <!-- <li><a href="/signup">Signup</a></li>
+                <li><a href="/login">Sign-in</a></li> -->
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
-        <a href="/cart"><div class="cart"><img src="cart.png" width="50px" height="50px"></div></a>
+        <a href="/cart_new"><div class="cart"><img src="cart.png" width="50px" height="50px"></div></a>
         <div id="cartAmount" class="cartAmount">0</div>
         <img src="menu.png" class="menu-icon" onclick="menutoggle()">
     </div>
@@ -41,7 +42,7 @@
             <div id="billingSection">
                 <h2>Billing</h2>
                 <!-- Adding user details input fields inside a form -->
-                <form action="/checkout" method="post">
+                <form action="/checkout_new" method="post">
                     <div>
                         <label for="fullName"></label>
                         <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
@@ -61,9 +62,7 @@
                             <option value="payByQRCode">Pay through QR Code</option>
                         </select>
                         <button type="submit" id="payButton">Place Order</button>
-                        <a href="/cart">
-                            <button id="goBackButton">Back to Cart</button>
-                        </a>
+                        <a href="/cart_new"><button id="goBackButton">Back to Cart</button></a>
                     </div>
                 </form>
             </div>
