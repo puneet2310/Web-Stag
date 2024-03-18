@@ -1,5 +1,6 @@
+//this file just establishes connection with the mongodb database and gives responses as needed
 const mongoose = require('mongoose')
-mongoose.connect("mongodb://localhost:27017/per")
+mongoose.connect("mongodb://localhost:27017/per")    //connectio string to the database called per
 .then(() => {
     console.log("MONGO CONNECTED")
 })
@@ -7,6 +8,7 @@ mongoose.connect("mongodb://localhost:27017/per")
     console.log("ERROR")
 })
 
+//defining the schema for all inputs
 const userSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -47,5 +49,6 @@ userSchema.pre('save', function(next) {
     next();
 });
 
+//making a collection called user but mongodb changes it to users 
 const User = new mongoose.model("User",userSchema)
-module.exports = User
+module.exports = User    //export the model to use in other parts of the pages
