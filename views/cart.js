@@ -34,7 +34,8 @@ let generateCartItems = () => {
             <i onclick="removeItem(${id})" class="bi bi-x-lg"></i>
           </div>
 
-          <div class="cart-buttons">
+          //this snippet is for the buttons in the cart 
+          <div class="cart-buttons">    
             <div class="buttons">
               <i onclick="decrement(${id})" class="bi bi-dash-lg"></i>
               <div id=${id} class="quantity">${item}</div>
@@ -49,13 +50,14 @@ let generateCartItems = () => {
       `;
       })
       .join(""));    //join all elements in a single string
-    //cha-hae-inn aint angt-t the 
+    
+    //in case tehe basket is empty, show the button  of empty cart 
   } else {
     ShoppingCart.innerHTML = "";
     label.innerHTML = `
     <h2>Cart is Empty</h2>
     <a href="/new_index">
-      <button class="HomeBtn">Back to Home</button>
+      <button class="HomeBtn">Back to Home</button>  
     </a>
     `;
   }
