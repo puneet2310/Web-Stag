@@ -1,22 +1,25 @@
+//this one is for the checkout/payment page 
 let ShoppingCart = document.getElementById("shopping-cart");
 let label = document.getElementById("label");
 
-let basket = JSON.parse(localStorage.getItem("data")) || [];
+let basket = JSON.parse(localStorage.getItem("data")) || [];   //getting the basket with items from the local storage 
 
 let calculation = () => {
-  let cartIcon = document.getElementById("cartAmount");
+  let cartIcon = document.getElementById("cartAmount");    //calculation of the cart total amount by items*prices
   cartIcon.innerHTML = basket.map((x) => x.item).reduce((x, y) => x + y, 0);
 };
 
 calculation();
 
 let generateCartItems = () => {
-  if (basket.length !== 0) {
+  if (basket.length !== 0) {    //execute when the cart is not empty
     return (ShoppingCart.innerHTML = basket
       .map((x) => {
         let { id, item } = x;
         let search = shopItemsData.find((x) => x.id === id) || [];
         let { img, price, name } = search;
+
+        //this is all just the data for the cart item inside the checkout page now 
         return `
       <div class="cart-item">
         <img width="100" src=${img} alt="" />
@@ -30,7 +33,7 @@ let generateCartItems = () => {
             </h4>
            
           </div>
-
+          
           <div class="cart-buttons">
             <div class="buttons">
               
@@ -39,14 +42,14 @@ let generateCartItems = () => {
             </div>
           </div>
 
-          <h3>$ ${item * price}</h3>
+          <h3>$ ${item * price}</h3>  
         
         </div>
       </div>
       `;
       })
       .join(""));
-  } else {
+  } else {    //when the cart is empty then we just give the button to go back to the home page thats it 
     ShoppingCart.innerHTML = "";
     label.innerHTML = `
     <h2>Cart is Empty</h2>
@@ -62,21 +65,21 @@ generateCartItems();
 let increment = (id) => {
   let selectedItem = id;
   let search = basket.find((x) => x.id === selectedItem.id);
-
+  //in case the item isnt found inside the checkout basket then just push it as well
   if (search === undefined) {
     basket.push({
       id: selectedItem.id,
       item: 1,
     });
-  } else {
+  } else {    //and if it is found then increment its value
     search.item += 1;
   }
 
   generateCartItems();
-  update(selectedItem.id);
-  localStorage.setItem("data", JSON.stringify(basket));
+  update(selectedItem.id);  
+  localStorage.setItem("data", JSON.stringify(basket));    //update the values in the local storage basket
 };
-
+//next is the decrement function
 let decrement = (id) => {
   let selectedItem = id;
   let search = basket.find((x) => x.id === selectedItem.id);
@@ -109,6 +112,7 @@ let removeItem = (id) => {
   localStorage.setItem("data", JSON.stringify(basket));
 };
 
+//total amount inside the basket updation
 let TotalAmount = () => {
   if (basket.length !== 0) {
     let amount = basket
@@ -135,10 +139,12 @@ let clearCart = () => {
   localStorage.setItem("data", JSON.stringify(basket));
 };
 
+//now we have the payment method where you cannot exactly pay through qr but there is a button like that 
 function changePaymentMethod() {
   let paymentMethod = document.getElementById("paymentMethod").value;
   let payButton = document.getElementById("payButton");
 
+  //if option chosen is payon delivery then give button names place order or show button pay
   if (paymentMethod === "payOnDelivery") {
     payButton.innerHTML = "Place Order";
   } else {
@@ -156,6 +162,7 @@ function handlePayment() {
   }
 }
 
+//now are the functions for each option of payment where in both we just have a popup
 function placeOrder() {
   alert("Your order has been placed. Thank you!");
   clearCart(); // Clear the cart
